@@ -142,7 +142,7 @@ function showQuest () {
           answer1.innerText = allAnswers[0];
           answer2.innerText = allAnswers[1];
           answer3.style.display = "none";
-          answer4.style.display = "none";
+          answer4.style.display = "none";  // modificare e fare comparire lato js le risposte, non lato HTML
         };
         
         // Aggiungi un evento di ascolto per gestire la risposta dell'utente
@@ -161,15 +161,16 @@ function showQuest () {
 
 // Funzione per mescolare casualmente un array utilizzando la funzione sort con logica di confronto casuale
 function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);   // con slice salviamo una copia dell'array originale, sort richiama la funzione che assegna il random
+  return array.sort(() => Math.random() - 0.5);   // sort richiama la funzione che assegna il random
 }
 
 //funzione per vedere se la risposta è corretta
 function checkAnswer(event) {
-  let userAnswer = event.target.textContent; // Ottieni la risposta selezionata dall'utente
+  let userAnswer = document.querySelectorAll(".answer"); // Ottieni la risposta selezionata dall'utente
+  console.log(userAnswer)
 
-  // Verifica se la risposta dell'utente è corretta
-  if (userAnswer === questions[questionNumber].correct_answer) {
+// Verifica se la risposta dell'utente è corretta
+  if (userAnswer.value === questions[questionNumber].correct_answer) {
     score ++; // Incrementa il punteggio se la risposta è corretta
   }
 
