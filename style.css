@@ -109,10 +109,10 @@ body {
     color: white;
     font-size: 18px;
     font-family: "inter";
+    margin: 20px 100px;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-content: space-between;
+    flex-wrap: wrap;
 }
 
 #answers input {
@@ -126,9 +126,10 @@ input[type="radio"] {
 
 label {
     display: inline-block;
-    margin-top: 50px;
+    margin: 40px 40px;
+    text-align: center;
     height: fit-content;
-    width: fit-content; /*se non ci piace la resa sui testi brevi possiamo anche dargli valore fisso, poi vediamo*/
+    width: 150px;
     background-color: transparent;
     color: white;
     border-radius: 5px;
@@ -150,7 +151,7 @@ input[type="radio"]:checked + label {
     border: #00ffff;
     border-radius: 10px;
     cursor:pointer;
-    margin-top: 100px;
+    margin-top: 60px;
     align-self: center;
 }
 
