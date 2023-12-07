@@ -133,12 +133,14 @@ function showQuest () {
         answerBtn.setAttribute("name", "option");
         answerBtn.setAttribute("value", " ");
         answerBtn.setAttribute("id", "quest");
+        answerBtn.classList.add("radio-input");
         answerLabel.setAttribute("for", "quest");
+        answerLabel.classList.add("label-input");
         answerLabel.innerText = element;
         questParent.appendChild(answerBtn);
         questParent.appendChild(answerLabel);
 
-        // answerBtn.classList.add("nomeclasse");
+        // 
       }
             
         // Aggiungi un evento di ascolto per gestire la risposta dell'utente
