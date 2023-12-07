@@ -116,10 +116,10 @@ function showQuest () {
   let questParent = document.getElementById("quiz");  //catturo il parent
   questParent.innerHTML = "";
 
-      if (questionNumber < questions.length) {
-        let question = document.createElement("h1");       // creo l'h1 per le domande
-        question.innerText = questions[questionNumber].question;
-        questParent.appendChild(question);                   // inserisco l'h1 per le domande     
+    if (questionNumber < questions.length) {
+      let question = document.createElement("h1");       // creo l'h1 per le domande
+      question.innerText = questions[questionNumber].question;
+      questParent.appendChild(question);                   // inserisco l'h1 per le domande     
 
       let correctAnswer = questions[questionNumber].correct_answer;                           // salvo solo le risposte corrette
       let allAnswers = [correctAnswer].concat(questions[questionNumber].incorrect_answers);  // unisce le risposte corrette a quelle errate in un array
@@ -139,21 +139,10 @@ function showQuest () {
         answerLabel.innerText = element;
         questParent.appendChild(answerBtn);
         questParent.appendChild(answerLabel);
-
-        // 
-      }
-            
-        // Aggiungi un evento di ascolto per gestire la risposta dell'utente
-        let answerInputs = document.getElementsByClassName("answer");
-        for (let i = 0; i < answerInputs.length; i++) {
-          answerInputs[i].checked = false;
-        }
-        for (let i = 0; i < answerInputs.length; i++) {
-        answerInputs[i].addEventListener("click", checkAnswer); // do un evento di ascolto a ogni input di classe answer
-        };
-
-  }
-
+      };
+    } else {showResult};
+  
+  nextQuestion()
 };
 
 // Funzione per mescolare casualmente un array utilizzando la funzione sort con logica di confronto casuale
@@ -179,8 +168,8 @@ function checkAnswer(event) {
 //quando premi il tasto next question scompare il bottone e fa ripartire la funzione principale delle domande e risposte
 function nextQuestion() {
   let nextButton = document.getElementById("nextQuestion");
+  nextButton.style.display = "block";
   nextButton.style.display = "none"; // Nascondi il pulsante "Next Question"
-
   showQuest(); // Mostra la prossima domanda
 }
 
