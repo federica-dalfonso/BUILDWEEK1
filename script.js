@@ -108,7 +108,7 @@ function startTest() {
     document.getElementById("main").style.display = "none";
     document.getElementById("quiz").style.display = "block";
     showQuest();
-  }
+  };
 }
 
 // funzione che mostra domande-risposte:
@@ -126,34 +126,25 @@ function showQuest () {
 
       allAnswers = shuffleArray(allAnswers);              // funzione che mischia le domande
 
-      for (let element of allAnswers) {
+      for (let i = 0; i < allAnswers.length; i++) {
         let answerBtn = document.createElement("input");
         let answerLabel = document.createElement("label");
+        let radioId = "radio" + i;
+
         answerBtn.setAttribute("type", "radio");  // input radio
         answerBtn.setAttribute("name", "option");
-        answerBtn.setAttribute("value", " ");
-        answerBtn.setAttribute("id", "quest");
+        answerBtn.setAttribute("value", allAnswers[i]);
+        answerBtn.setAttribute("id", radioId);
         answerBtn.classList.add("radio-input");
-        answerLabel.setAttribute("for", "quest");
+
+        answerLabel.setAttribute("for", radioId);
         answerLabel.classList.add("label-input");
-        answerLabel.innerText = element;
-        questParent.appendChild(answerBtn);
+        answerLabel.innerText = allAnswers[i];
+
+        questParent.appendChild(answerBtn).addEventListener("click", nextQuestion);
         questParent.appendChild(answerLabel);
-      };
-      
-      // Aggiungi un evento di ascolto per gestire la risposta dell'utente
-      let answerInputs = document.getElementsByClassName("radio-input");
-        // tolgo un listener per ogni input di classe 'answer'
-        for (let i = 0; i < answerInputs.length; i++) {
-          answerInputs[i].checked = false;
-        }
-        // Aggiungi un listener per ogni input di classe 'answer'   
-        for (let i = 0; i < answerInputs.length; i++) {
-        answerInputs[i].addEventListener("click", checkAnswer); // do un evento di ascolto a ogni input di classe answer QUI CE IL BUG
-        }
+      };   
     } else {showResult()};
-    
-    checkAnswer();
 };
 
 // Funzione per mescolare casualmente un array utilizzando la funzione sort con logica di confronto casuale
@@ -161,21 +152,9 @@ function shuffleArray(array) {
   return array.sort(() => Math.random() - 0.5);   // sort richiama la funzione che assegna il random
 }
 
-//funzione per vedere se la risposta è corretta
-function checkAnswer(event) {
-  if (answerBtn.value === questions[questionNumber].correct_answer) {
-    score ++; // Incrementa il punteggio se la risposta è corretta
-  }
-
-  questionNumber++; // Passa alla prossima domanda
-
-  nextQuestion()
-}
-
 //quando premi il tasto next question scompare il bottone e fa ripartire la funzione principale delle domande e risposte
 function nextQuestion() {
   let nextButton = document.getElementById("nextQuestion");
-  nextButton.style.display = "block";
   nextButton.style.display = "none"; // Nascondi il pulsante "Next Question"
   showQuest(); // Mostra la prossima domanda
 }

@@ -124,7 +124,7 @@ input[type="radio"] {
     display: none;
 }
 
-label {
+.label-input {
     display: inline-block;
     margin: 40px 40px;
     text-align: center;
@@ -138,7 +138,7 @@ label {
     padding: 20px 10px;
 }
 
-input[type="radio"]:checked + label {
+input[type="radio"]:checked + .label-input {
     background-color: #d20094;
 }
 
