@@ -113,51 +113,50 @@ function startTest() {
 
 // funzione che mostra domande-risposte:
 function showQuest () {
+  let questParent = document.getElementById("quiz");  //catturo il parent
+  let question = document.createElement("h1");       // creo l'h1 per le domande
 
-    let question = document.getElementById("question");
-    let answer1 = document.getElementById("primo");
-    let answer2 = document.getElementById("secondo");
-    let answer3 = document.getElementById("terzo");
-    let answer4 = document.getElementById("quarto");
-      
-      if (questionNumber < questions.length) {
-        question.innerText = questions[questionNumber].question;  // assegna il testo della domanda al node selezionato
+  question.innerHTML = "";
 
-        let correctAnswer = questions[questionNumber].correct_answer;  // salvo solo le risposte corrette
-        let allAnswers = [correctAnswer].concat(questions[questionNumber].incorrect_answers); // unisce le risposte corrette a quelle errate in un array
+  if (questionNumber < questions.length) {
+    question.innerText = questions[questionNumber].question;
+  } // fare l'elese
 
-        
-        allAnswers = shuffleArray(allAnswers); // richiamo la funzione che mischia le risposte prima di presentarle all'utente
+  questParent.appendChild(question);                   // inserisco l'h1 per le domande
+
+  let correctAnswer = questions[questionNumber].correct_answer;                           // salvo solo le risposte corrette
+  let allAnswers = [correctAnswer].concat(questions[questionNumber].incorrect_answers);  // unisce le risposte corrette a quelle errate in un array
+
+  allAnswers = shuffleArray(allAnswers);              // funzione che mischia le domande
+
+  for (let element of allAnswers) {
+    let answerBtn = document.createElement("input");
+    let answerLabel = document.createElement("label");
+    answerBtn.setAttribute("type", "radio");  // input radio
+    answerBtn.setAttribute("name", "option");
+    answerBtn.setAttribute("value", "value");
+    answerBtn.setAttribute("id", "answerOption");
+    answerBtn.innerHTML = "";
+    answerLabel.innerHTML = "";
+    answerLabel.innerText = element;
+    questParent.appendChild(answerBtn);
+    questParent.insertBefore(answerLabel, answerBtn);
+
+    // answerBtn.classList.add("nomeclasse");
 
 
-        if (questions[questionNumber].type === "multiple") { // gestione caso in cui la domanda preveda solo due risposte
-          answer3.style.display = "block";                   // impostiamo il block così qualora la domanda mostrata precedentemente era ELSE, le opzioni tornano visibili (or inline-block)
-          answer4.style.display = "block";
-
-          answer1.innerText = allAnswers[0];
-          answer2.innerText = allAnswers[1];
-          answer3.innerText = allAnswers[2];
-          answer4.innerText = allAnswers[3];
-        } else {                                              
-          answer1.innerText = allAnswers[0];
-          answer2.innerText = allAnswers[1];
-          answer3.style.display = "none";
-          answer4.style.display = "none";  // modificare e fare comparire lato js le risposte, non lato HTML
-        };
-        
-        // Aggiungi un evento di ascolto per gestire la risposta dell'utente
-        let answerInputs = document.getElementsByClassName("answer");
-        for (let i = 0; i < answerInputs.length; i++) {
-          answerInputs[i].checked = false;
-        }
-        for (let i = 0; i < answerInputs.length; i++) {
-        answerInputs[i].addEventListener("click", checkAnswer); // do un evento di ascolto a ogni input di classe answer
-        };
-
-      } else {
-        showResult()
-      }
   }
+        
+    // Aggiungi un evento di ascolto per gestire la risposta dell'utente
+    let answerInputs = document.getElementsByClassName("answer");
+    for (let i = 0; i < answerInputs.length; i++) {
+      answerInputs[i].checked = false;
+    }
+    for (let i = 0; i < answerInputs.length; i++) {
+    answerInputs[i].addEventListener("click", checkAnswer); // do un evento di ascolto a ogni input di classe answer
+    };
+
+};
 
 // Funzione per mescolare casualmente un array utilizzando la funzione sort con logica di confronto casuale
 function shuffleArray(array) {
