@@ -114,47 +114,44 @@ function startTest() {
 // funzione che mostra domande-risposte:
 function showQuest () {
   let questParent = document.getElementById("quiz");  //catturo il parent
-  let question = document.createElement("h1");       // creo l'h1 per le domande
+  questParent.innerHTML = "";
 
-  question.innerHTML = "";
+      if (questionNumber < questions.length) {
+        let question = document.createElement("h1");       // creo l'h1 per le domande
+        question.innerText = questions[questionNumber].question;
+        questParent.appendChild(question);                   // inserisco l'h1 per le domande     
 
-  if (questionNumber < questions.length) {
-    question.innerText = questions[questionNumber].question;
-  } // fare l'elese
+      let correctAnswer = questions[questionNumber].correct_answer;                           // salvo solo le risposte corrette
+      let allAnswers = [correctAnswer].concat(questions[questionNumber].incorrect_answers);  // unisce le risposte corrette a quelle errate in un array
 
-  questParent.appendChild(question);                   // inserisco l'h1 per le domande
+      allAnswers = shuffleArray(allAnswers);              // funzione che mischia le domande
 
-  let correctAnswer = questions[questionNumber].correct_answer;                           // salvo solo le risposte corrette
-  let allAnswers = [correctAnswer].concat(questions[questionNumber].incorrect_answers);  // unisce le risposte corrette a quelle errate in un array
+      for (let element of allAnswers) {
+        let answerBtn = document.createElement("input");
+        let answerLabel = document.createElement("label");
+        answerBtn.setAttribute("type", "radio");  // input radio
+        answerBtn.setAttribute("name", "option");
+        answerBtn.setAttribute("value", " ");
+        answerBtn.setAttribute("id", "quest");
+        answerLabel.setAttribute("for", "quest");
+        answerLabel.innerText = element;
+        questParent.appendChild(answerBtn);
+        questParent.appendChild(answerLabel);
 
-  allAnswers = shuffleArray(allAnswers);              // funzione che mischia le domande
+        // answerBtn.classList.add("nomeclasse");
 
-  for (let element of allAnswers) {
-    let answerBtn = document.createElement("input");
-    let answerLabel = document.createElement("label");
-    answerBtn.setAttribute("type", "radio");  // input radio
-    answerBtn.setAttribute("name", "option");
-    answerBtn.setAttribute("value", "value");
-    answerBtn.setAttribute("id", "answerOption");
-    answerBtn.innerHTML = "";
-    answerLabel.innerHTML = "";
-    answerLabel.innerText = element;
-    questParent.appendChild(answerBtn);
-    questParent.insertBefore(answerLabel, answerBtn);
-
-    // answerBtn.classList.add("nomeclasse");
-
+      }
+            
+        // Aggiungi un evento di ascolto per gestire la risposta dell'utente
+        let answerInputs = document.getElementsByClassName("answer");
+        for (let i = 0; i < answerInputs.length; i++) {
+          answerInputs[i].checked = false;
+        }
+        for (let i = 0; i < answerInputs.length; i++) {
+        answerInputs[i].addEventListener("click", checkAnswer); // do un evento di ascolto a ogni input di classe answer
+        };
 
   }
-        
-    // Aggiungi un evento di ascolto per gestire la risposta dell'utente
-    let answerInputs = document.getElementsByClassName("answer");
-    for (let i = 0; i < answerInputs.length; i++) {
-      answerInputs[i].checked = false;
-    }
-    for (let i = 0; i < answerInputs.length; i++) {
-    answerInputs[i].addEventListener("click", checkAnswer); // do un evento di ascolto a ogni input di classe answer
-    };
 
 };
 
