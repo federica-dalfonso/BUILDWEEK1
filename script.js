@@ -140,9 +140,20 @@ function showQuest () {
         questParent.appendChild(answerBtn);
         questParent.appendChild(answerLabel);
       };
-    } else {showResult};
-  
-  nextQuestion()
+      
+      // Aggiungi un evento di ascolto per gestire la risposta dell'utente
+      let answerInputs = document.getElementsByClassName("radio-input");
+        // tolgo un listener per ogni input di classe 'answer'
+        for (let i = 0; i < answerInputs.length; i++) {
+          answerInputs[i].checked = false;
+        }
+        // Aggiungi un listener per ogni input di classe 'answer'   
+        for (let i = 0; i < answerInputs.length; i++) {
+        answerInputs[i].addEventListener("click", checkAnswer); // do un evento di ascolto a ogni input di classe answer QUI CE IL BUG
+        }
+    } else {showResult()};
+    
+    checkAnswer();
 };
 
 // Funzione per mescolare casualmente un array utilizzando la funzione sort con logica di confronto casuale
@@ -152,17 +163,13 @@ function shuffleArray(array) {
 
 //funzione per vedere se la risposta è corretta
 function checkAnswer(event) {
-  let userAnswer = document.querySelectorAll(".answer"); // Ottieni la risposta selezionata dall'utente
-  console.log(userAnswer)
-
-// Verifica se la risposta dell'utente è corretta
-  if (userAnswer.value === questions[questionNumber].correct_answer) {
+  if (answerBtn.value === questions[questionNumber].correct_answer) {
     score ++; // Incrementa il punteggio se la risposta è corretta
   }
 
   questionNumber++; // Passa alla prossima domanda
 
-  
+  nextQuestion()
 }
 
 //quando premi il tasto next question scompare il bottone e fa ripartire la funzione principale delle domande e risposte
@@ -172,7 +179,6 @@ function nextQuestion() {
   nextButton.style.display = "none"; // Nascondi il pulsante "Next Question"
   showQuest(); // Mostra la prossima domanda
 }
-
 
 //funzione del risultato
 function showResult() {
