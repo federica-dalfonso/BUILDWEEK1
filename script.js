@@ -139,7 +139,6 @@ function showQuest () {
         questParent.appendChild(answerLabel);
 
         // answerBtn.classList.add("nomeclasse");
-
       }
             
         // Aggiungi un evento di ascolto per gestire la risposta dell'utente
@@ -172,8 +171,7 @@ function checkAnswer(event) {
 
   questionNumber++; // Passa alla prossima domanda
 
-  let nextButton = document.getElementById("nextQuestion");
-  nextButton.style.display = "block"; // Mostra il pulsante "Next Question"
+  
 }
 
 //quando premi il tasto next question scompare il bottone e fa ripartire la funzione principale delle domande e risposte
