@@ -94,28 +94,25 @@ body {
 }
 
 #quiz {
-   display: none;
-   text-align: center;
+    color: white;
+    font-size: 20px;
+    font-family: "inter";
+    margin: 100px 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    display: none;
+    text-align: center;
 }
 
-#question {
+.quest-style {
     font-size: 60px;
     font-family: "outfit";
     font-weight: 300;
     color: white;
 }
 
-#answers {
-    color: white;
-    font-size: 18px;
-    font-family: "inter";
-    margin: 100px 100px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-#answers input {
+#quiz input {
     margin: 50px;
     cursor: pointer;
 }
@@ -152,8 +149,9 @@ input[type="radio"]:checked + label {
     border: #00ffff;
     border-radius: 10px;
     cursor:pointer;
-    margin-top: 60px;
+    margin-top: 50px;
     align-self: center;
+    display: none;
 }
 
 #divButtonNext {

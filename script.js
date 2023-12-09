@@ -98,8 +98,6 @@ const questions = [
     },
 ];
 
-
-
 let questionNumber = 0;
 
 // funzione che fa partire il test:
@@ -146,35 +144,33 @@ function showQuest () {
           questParent.appendChild(answerLabel);
 
           answerBtn.addEventListener("click", checkAnswer);
-        };   
-        
+        };                
       } else {showResult()};
 };
 
-// funzione prossima domanda
-function nextQuestion () {
-    let nextQuest = document.getElementById("nextQuestion");
-    // nextQuest.style.display = "none";
-    showQuest();
-}
+let nextQuest = document.getElementById("nextQuestion");
 
 // funzione controllo risposte 
 let score = 0;
 function checkAnswer (event) {
-    let selectedBtn = event.target.value;
-    let correctAnswer = questions[questionNumber].correct_answer;
+    let selectedBtn = event.target.nextElementSibling.textContent;
 
-    if (selectedBtn === correctAnswer) {
+    if (questions[questionNumber].correct_answer.includes(selectedBtn)) {
         score++;
     };
     questionNumber++; 
 
-    let nextQuest = document.getElementById("nextQuestion");
-    // nextQuest.style.display = "block";
+    // nextQuest = document.getElementById("nextQuestion");
+    nextQuest.style.display = "block";
 }
 
 
-
+// funzione prossima domanda
+function nextQuestion () {
+    // nextQuest = document.getElementById("nextQuestion");
+    nextQuest.style.display = "none";
+    showQuest();
+}
 
 // funzione risposte random
 function toRandomArray(array) {
@@ -188,3 +184,12 @@ function toRandomArray(array) {
 }
 
 
+function showResult() {
+    document.getElementById("quiz").style.display = "none";
+  
+    // Mostra solo il punteggio finale
+    let result = document.createElement("h2");
+    result.innerText = "This is your finale score: " + score;
+    result.classList.add("newH2");
+    document.body.appendChild(result);
+  }
