@@ -112,7 +112,7 @@ function startTest() {
 let questionNumber = 0;    // numero domanda
 
 function showQuest () {
-  timerStart();
+  // timerStart();
 
   let questParent = document.getElementById("quiz");  //catturo il parent
   questParent.innerHTML = "";
@@ -173,7 +173,7 @@ function checkAnswer (event) {
 function nextQuestion () {
     nextQuest.style.display = "none";
     showQuest();
-    timerStart ();
+    // timerStart ();
 }
 
 //5- funzione ordine risposte random
@@ -206,17 +206,17 @@ function toRandomArray(array) {
 //   }, 1000);
 // }
 
-// //7- funzione che mostra il risultato del test:
-// function showResult() {
-//     document.getElementById("quiz").style.display = "none";  //nascondo il div con il quiz
-//     clearInterval(timer);                                    // fermo il timer!
-//     time = 0;                                                 
-//     document.getElementById("timer").style.display = "none"; //nascondo il timer
+//7- funzione che mostra il risultato del test:
+function showResult() {
+    document.getElementById("quiz").style.display = "none";  //nascondo il div con il quiz
+    // clearInterval(timer);                                    // fermo il timer!
+    // time = 0;                                                 
+    // document.getElementById("timer").style.display = "none"; //nascondo il timer
   
-//     // Mostra il punteggio finale 
-//       let result = document.createElement("h2");
-//       result.innerText = "This is your finale score: " + score;
-//       result.classList.add("newH2");
-//       document.body.appendChild(result);
-      
-// }
+    // Mostra il punteggio finale 
+      let result = document.createElement("h2");
+      result.innerText = "This is your finale score: " + score;
+      result.classList.add("newH2");
+      document.body.appendChild(result);
+
+}
