@@ -175,7 +175,6 @@ function checkAnswer(event) {
 function nextQuestion () {
     nextQuest.style.display = "none";
     showQuest();
-    // timerStart ();
 }
 
 //5- funzione ordine risposte random
@@ -191,7 +190,7 @@ function toRandomArray(array) {
 
 
 //6- TIMER:
-// let time = 60; 
+// let time = 30; 
 // let timer; 
 
 // function timerStart () {
@@ -211,8 +210,7 @@ function toRandomArray(array) {
 //7- funzione che mostra il risultato del test:
 function showResult() {
     document.getElementById("quiz").style.display = "none";  //nascondo il div con il quiz
-    // clearInterval(timer);                                    // fermo il timer!
-    // time = 0;                                                 
+    // clearInterval(timer);                                    // fermo il timer!                                             
     // document.getElementById("timer").style.display = "none"; //nascondo il timer
   
     // Mostra il punteggio finale 
@@ -220,5 +218,4 @@ function showResult() {
       result.innerText = "This is your finale score: " + score;
       result.classList.add("newH2");
       document.body.appendChild(result);
-
 }
