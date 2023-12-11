@@ -123,7 +123,7 @@ function showQuest () {
         let correctAnswer = questions[questionNumber].correct_answer;                           // salvo solo le risposte corrette
         let allAnswers = [correctAnswer].concat(questions[questionNumber].incorrect_answers);  // unisce le risposte corrette a quelle errate in un array
   
-        allAnswers = toRandomArray(allAnswers);              // funzione risposte random
+        allAnswers = toRandomArray(allAnswers);              // funzione risposte in ordine random
   
         for (let i = 0; i < allAnswers.length; i++) {
           let answerBtn = document.createElement("input");
@@ -167,7 +167,6 @@ function checkAnswer (event) {
 
 // funzione prossima domanda
 function nextQuestion () {
-    // nextQuest = document.getElementById("nextQuestion");
     nextQuest.style.display = "none";
     showQuest();
 }
@@ -183,7 +182,7 @@ function toRandomArray(array) {
     return mixedArray;
 }
 
-
+// funzione che mostra il risultato del test:
 function showResult() {
     document.getElementById("quiz").style.display = "none";
   
