@@ -188,7 +188,6 @@ function toRandomArray(array) {
     return mixedArray;
 }
 
-
 //6- TIMER:
 // let time = 30; 
 // let timer; 
