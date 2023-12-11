@@ -146,7 +146,7 @@ function showQuest () {
           answerBtn.addEventListener("click", checkAnswer);
         };                
       } else {showResult()};
-};
+}
 
 let nextQuest = document.getElementById("nextQuestion");
 
@@ -191,4 +191,4 @@ function showResult() {
     result.innerText = "This is your finale score: " + score;
     result.classList.add("newH2");
     document.body.appendChild(result);
-  }
+}
