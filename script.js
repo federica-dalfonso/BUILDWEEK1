@@ -98,60 +98,65 @@ const questions = [
     },
 ];
 
-let questionNumber = 0;
 
-// funzione che fa partire il test:
+//1- funzione che fa partire il test:
 function startTest() {
-    if (document.getElementById("trusty").checked) {
-      document.getElementById("main").style.display = "none";
-      document.getElementById("quiz").style.display = "block";
-      showQuest();
-    };
+  if (document.getElementById("trusty").checked) {              // ci assicuriamo che il test parta solo se la spunta è stata messa
+    document.getElementById("main").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    showQuest();
+  };
 }
 
-// funzione che mostra domande-risposte:
+//2- funzione che mostra domande-risposte:
+let questionNumber = 0;    // numero domanda
+
 function showQuest () {
-    let questParent = document.getElementById("quiz");  //catturo il parent
-    questParent.innerHTML = "";
-  
-      if (questionNumber < questions.length) {
-        let question = document.createElement("h1");       // creo l'h1 per le domande
-        question.innerText = questions[questionNumber].question;
-        question.classList.add("quest-style");
-        questParent.appendChild(question);                   // inserisco l'h1 per le domande     
-  
-        let correctAnswer = questions[questionNumber].correct_answer;                           // salvo solo le risposte corrette
-        let allAnswers = [correctAnswer].concat(questions[questionNumber].incorrect_answers);  // unisce le risposte corrette a quelle errate in un array
-  
-        allAnswers = toRandomArray(allAnswers);              // funzione risposte in ordine random
-  
-        for (let i = 0; i < allAnswers.length; i++) {
-          let answerBtn = document.createElement("input");
-          let answerLabel = document.createElement("label");
-          let radioId = "radio" + i;
-  
-          answerBtn.setAttribute("type", "radio");  // input radio
-          answerBtn.setAttribute("name", "option");
-          answerBtn.setAttribute("value", allAnswers[i]);
-          answerBtn.setAttribute("id", radioId);
-          answerBtn.classList.add("radio-input");
-  
-          answerLabel.setAttribute("for", radioId);
-          answerLabel.classList.add("label-input");
-          answerLabel.innerText = allAnswers[i];
-  
-          questParent.appendChild(answerBtn);
-          questParent.appendChild(answerLabel);
+  timerStart();
 
-          answerBtn.addEventListener("click", checkAnswer);
-        };                
-      } else {showResult()};
+  let questParent = document.getElementById("quiz");  //catturo il parent
+  questParent.innerHTML = "";
+    
+
+    if (questionNumber < questions.length) {
+      let question = document.createElement("h1");       // creo l'h1 per le domande
+      question.innerText = questions[questionNumber].question;
+      question.classList.add("quest-style");
+      questParent.appendChild(question);                   // inserisco l'h1 per le domande     
+
+      let correctAnswer = questions[questionNumber].correct_answer;                           // salvo solo le risposte corrette
+      let allAnswers = [correctAnswer].concat(questions[questionNumber].incorrect_answers);  // unisce le risposte corrette a quelle errate in un array
+
+      allAnswers = toRandomArray(allAnswers);              // risposte in ordine random
+
+      for (let i = 0; i < allAnswers.length; i++) {           // creo elementi necessari a mostrare risposte
+      let answerBtn = document.createElement("input");
+      let answerLabel = document.createElement("label");
+      let radioId = "radio" + i;
+
+      answerBtn.setAttribute("type", "radio");  // input radio
+      answerBtn.setAttribute("name", "option");
+      answerBtn.setAttribute("value", allAnswers[i]);
+      answerBtn.setAttribute("id", radioId);
+      answerBtn.classList.add("radio-input");
+
+      answerLabel.setAttribute("for", radioId);
+      answerLabel.classList.add("label-input");
+      answerLabel.innerText = allAnswers[i];
+
+      questParent.appendChild(answerBtn);
+      questParent.appendChild(answerLabel);
+
+      answerBtn.addEventListener("click", checkAnswer);       // richiamo funzione per check risposta corretta e incremento punteggio
+      };
+
+  } else {showResult()};
 }
 
-let nextQuest = document.getElementById("nextQuestion");
+let nextQuest = document.getElementById("nextQuestion");          // bottone prossima domanda
 
-// funzione controllo risposte 
-let score = 0;
+//3- funzione controllo risposte 
+let score = 0;                                                    // variabile punteggio
 function checkAnswer (event) {
     let selectedBtn = event.target.nextElementSibling.textContent;
 
@@ -160,18 +165,18 @@ function checkAnswer (event) {
     };
     questionNumber++; 
 
-    // nextQuest = document.getElementById("nextQuestion");
     nextQuest.style.display = "block";
 }
 
 
-// funzione prossima domanda
+//4- funzione prossima domanda
 function nextQuestion () {
     nextQuest.style.display = "none";
     showQuest();
+    timerStart ();
 }
 
-// funzione risposte random
+//5- funzione ordine risposte random
 function toRandomArray(array) {
     let mixedArray = [];
     while (array.length > 0) {
@@ -182,13 +187,36 @@ function toRandomArray(array) {
     return mixedArray;
 }
 
-// funzione che mostra il risultato del test:
-function showResult() {
-    document.getElementById("quiz").style.display = "none";
+
+//6- TIMER:
+// let time = 60; 
+// let timer; 
+
+// function timerStart () {
+//   clearInterval(timer);
+//   timer = setInterval( () => {
+//     document.getElementById("timer").textContent = "seconds " + time + " remaining";
+//     time--;
+    
+//     if (time <= 0) {
+//       clearInterval(timer); 
+//       questionNumber++;
+//       nextQuestion();
+//     }
+//   }, 1000);
+// }
+
+// //7- funzione che mostra il risultato del test:
+// function showResult() {
+//     document.getElementById("quiz").style.display = "none";  //nascondo il div con il quiz
+//     clearInterval(timer);                                    // fermo il timer!
+//     time = 0;                                                 
+//     document.getElementById("timer").style.display = "none"; //nascondo il timer
   
-    // Mostra solo il punteggio finale
-    let result = document.createElement("h2");
-    result.innerText = "This is your finale score: " + score;
-    result.classList.add("newH2");
-    document.body.appendChild(result);
-}
+//     // Mostra il punteggio finale 
+//       let result = document.createElement("h2");
+//       result.innerText = "This is your finale score: " + score;
+//       result.classList.add("newH2");
+//       document.body.appendChild(result);
+      
+// }
