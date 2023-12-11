@@ -165,6 +165,7 @@ function checkAnswer(event) {
         score++;
     }
     questionNumber++;
+    
     let nextQuest = document.getElementById("nextQuestion");
     nextQuest.style.display = "block";
 }
