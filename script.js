@@ -153,6 +153,7 @@ function showQuest () {
 }
 
 let nextQuest = document.getElementById("nextQuestion");          // bottone prossima domanda
+
 //3- funzione controllo risposte 
 let score = 0;  // variabile punteggio
 
@@ -167,7 +168,6 @@ function checkAnswer(event) {
     let nextQuest = document.getElementById("nextQuestion");
     nextQuest.style.display = "block";
 }
-
 
 //4- funzione prossima domanda
 function nextQuestion () {
