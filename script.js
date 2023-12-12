@@ -110,7 +110,6 @@ function startTest() {
 
 //2- funzione che mostra domande-risposte:
 let questionNumber = 0;    // numero domanda
-
 function showQuest () {
   // timerStart();
 
@@ -125,11 +124,11 @@ function showQuest () {
       questParent.appendChild(question);                   // inserisco l'h1 per le domande     
 
       let correctAnswer = questions[questionNumber].correct_answer;                           // salvo solo le risposte corrette
-      let allAnswers = [correctAnswer].concat(questions[questionNumber].incorrect_answers);  // unisce le risposte corrette a quelle errate in un array
+      let allAnswers = [correctAnswer].concat(questions[questionNumber].incorrect_answers);   // unisce le risposte corrette a quelle errate in un array
 
       allAnswers = toRandomArray(allAnswers);              // risposte in ordine random
 
-      for (let i = 0; i < allAnswers.length; i++) {           // creo elementi necessari a mostrare risposte
+      for (let i = 0; i < allAnswers.length; i++) {        // creo elementi necessari a mostrare risposte
       let answerBtn = document.createElement("input");
       let answerLabel = document.createElement("label");
       let radioId = "radio" + i;
@@ -154,7 +153,6 @@ function showQuest () {
 }
 
 let nextQuest = document.getElementById("nextQuestion");          // bottone prossima domanda
-
 //3- funzione controllo risposte 
 let score = 0;  // variabile punteggio
 
